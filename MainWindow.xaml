@@ -14,7 +14,7 @@
 
         <Canvas>
 
-            <!-- Puerta -->
+            <!-- Puerta cerrada -->
             <Image Source="/imagenes/PuertaDesactivada.png"
                Width="200"
                Canvas.Left="350"
@@ -32,11 +32,21 @@
                    Canvas.Left="250"
                    Canvas.Top="170"/>
 
-            <!-- Aire acondicionado -->
-            <Image Source="/imagenes/AireDesactivado.png"
-                   Width="200"
-                   Canvas.Left="120"
-                   Canvas.Top="-40"/>
+            <!-- Aire acondicionado apagado -->
+            <Grid Canvas.Left="120" Canvas.Top="-40">
+                <Image Source="/imagenes/AireDesactivado.png"
+                   Width="200"/>
+
+                    <TextBlock x:Name="TxtTemperatura" 
+                           Text="22°C"
+                           FontSize="15"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Padding="2"
+                           Visibility="Hidden"/>
+            </Grid>
 
             <!-- Lámpara -->
             <Image Source="/imagenes/LuzDesactivada.png"
