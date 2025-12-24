@@ -1,0 +1,73 @@
+﻿<Window x:Class="CasaDomotica.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CasaDomotica"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/imagenes/Fondo.png"
+                        Stretch="UniformToFill"/>
+        </Grid.Background>
+
+        <Canvas>
+
+            <!-- Puerta -->
+            <Image Source="/imagenes/PuertaDesactivada.png"
+               Width="200"
+               Canvas.Left="350"
+               Canvas.Top="68"/>
+            
+            <!-- Sofá -->
+            <Image Source="/imagenes/Sofa.png"
+               Width="300"
+               Canvas.Left="100"
+               Canvas.Top="100"/>
+
+            <!-- Mesa -->
+            <Image Source="/imagenes/Mesa.png"
+                   Width="300"
+                   Canvas.Left="250"
+                   Canvas.Top="170"/>
+
+            <!-- Aire acondicionado -->
+            <Image Source="/imagenes/AireDesactivado.png"
+                   Width="200"
+                   Canvas.Left="120"
+                   Canvas.Top="-40"/>
+
+            <!-- Lámpara -->
+            <Image Source="/imagenes/LuzDesactivada.png"
+               Width="200"
+               Canvas.Left="10"
+               Canvas.Top="100"/>
+
+            <!-- Mueble -->
+            <Image Source="/imagenes/Mueble.png"
+               Width="280"
+               Canvas.Right="0"
+               Canvas.Top="150"/>
+
+            <!-- Tele -->
+            <Image Source="/imagenes/TeleDesactivada.png"
+               Width="200"
+               Canvas.Right="20"
+               Canvas.Top="130"/>
+
+            <!-- Reloj -->
+            <Image Source="/imagenes/Reloj.png"
+               Width="100"
+               Canvas.Right="150"
+               Canvas.Top="70"/>
+
+            <!-- Paco -->
+            <Image Source="/imagenes/PacoDesactivado.png"
+               Width="90"
+               Canvas.Right="290"
+               Canvas.Bottom="130"/>
+
+        </Canvas>
+    </Grid>
+</Window>
