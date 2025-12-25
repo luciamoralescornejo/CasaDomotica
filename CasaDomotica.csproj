@@ -8,4 +8,78 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="imagenes\AireDesactivado.png" />
+    <None Remove="imagenes\Fondo.png" />
+    <None Remove="imagenes\LuzActivada.png" />
+    <None Remove="imagenes\LuzDesactivada.png" />
+    <None Remove="imagenes\Mesa.png" />
+    <None Remove="imagenes\Mueble.png" />
+    <None Remove="imagenes\PacoActivado.png" />
+    <None Remove="imagenes\PacoDesactivado.png" />
+    <None Remove="imagenes\PuertaActivada.png" />
+    <None Remove="imagenes\PuertaDesactivada.png" />
+    <None Remove="imagenes\Reloj.png" />
+    <None Remove="imagenes\Sofa.png" />
+    <None Remove="imagenes\TeleDesactivada.png" />
+    <None Remove="imagenes\TeleNoticias.png" />
+    <None Remove="imagenes\TeleTiempo.png" />
+    <None Remove="imagenes\TeleYouTube.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Speech" Version="10.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="imagenes\AireDesactivado.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="imagenes\Fondo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="imagenes\LuzActivada.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="imagenes\LuzDesactivada.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="imagenes\Mesa.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="imagenes\Mueble.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="imagenes\PacoActivado.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="imagenes\PacoDesactivado.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="imagenes\PuertaActivada.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="imagenes\PuertaDesactivada.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="imagenes\Reloj.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="imagenes\Sofa.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="imagenes\TeleDesactivada.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="imagenes\TeleNoticias.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="imagenes\TeleTiempo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="imagenes\TeleYouTube.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
 </Project>

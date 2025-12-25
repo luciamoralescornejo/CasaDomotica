@@ -15,29 +15,29 @@
         <Canvas>
 
             <!-- Puerta cerrada -->
-            <Image Source="/imagenes/PuertaDesactivada.png"
+            <Image x:Name="imgPuerta" Source="/imagenes/PuertaDesactivada.png"
                Width="200"
                Canvas.Left="350"
                Canvas.Top="68"/>
-            
+
             <!-- Sofá -->
-            <Image Source="/imagenes/Sofa.png"
+            <Image x:Name="imgSofa" Source="/imagenes/Sofa.png"
                Width="300"
                Canvas.Left="100"
                Canvas.Top="100"/>
 
             <!-- Mesa -->
-            <Image Source="/imagenes/Mesa.png"
+            <Image x:Name="imgMesa" Source="/imagenes/Mesa.png"
                    Width="300"
                    Canvas.Left="250"
                    Canvas.Top="170"/>
 
             <!-- Aire acondicionado apagado -->
             <Grid Canvas.Left="120" Canvas.Top="-40">
-                <Image Source="/imagenes/AireDesactivado.png"
+                <Image x:Name="imgAire" Source="/imagenes/AireDesactivado.png"
                    Width="200"/>
 
-                    <TextBlock x:Name="TxtTemperatura" 
+                <TextBlock x:Name="TxtTemperatura" 
                            Text="22°C"
                            FontSize="15"
                            FontWeight="Bold"
@@ -49,34 +49,36 @@
             </Grid>
 
             <!-- Lámpara -->
-            <Image Source="/imagenes/LuzDesactivada.png"
+            <Image x:Name="imgLuz" Source="/imagenes/LuzDesactivada.png"
                Width="200"
                Canvas.Left="10"
                Canvas.Top="100"/>
 
             <!-- Mueble -->
-            <Image Source="/imagenes/Mueble.png"
+            <Image x:Name="imgMueble" Source="/imagenes/Mueble.png"
                Width="280"
                Canvas.Right="0"
                Canvas.Top="150"/>
 
             <!-- Tele -->
-            <Image Source="/imagenes/TeleDesactivada.png"
+            <Image x:Name="imgTele" Source="/imagenes/TeleDesactivada.png"
                Width="200"
                Canvas.Right="20"
                Canvas.Top="130"/>
 
             <!-- Reloj -->
-            <Image Source="/imagenes/Reloj.png"
+            <Image x:Name="imgReloj" Source="/imagenes/Reloj.png"
                Width="100"
                Canvas.Right="150"
                Canvas.Top="70"/>
 
             <!-- Paco -->
-            <Image Source="/imagenes/PacoDesactivado.png"
+            <Image x:Name="imgPaco" Source="/imagenes/PacoDesactivado.png"
                Width="90"
                Canvas.Right="290"
                Canvas.Bottom="130"/>
+            <Label x:Name="lblTexto" Content="Label" Canvas.Left="192" Canvas.Top="130" Height="35" Width="153"/>
+            <Label x:Name="lblTextoPaco" Content="Label" Canvas.Left="192" Canvas.Top="168" Height="35" Width="153" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
         </Canvas>
     </Grid>
