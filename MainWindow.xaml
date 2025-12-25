@@ -79,6 +79,7 @@
                Canvas.Bottom="130"/>
             <Label x:Name="lblTexto" Content="Label" Canvas.Left="192" Canvas.Top="130" Height="35" Width="153"/>
             <Label x:Name="lblTextoPaco" Content="Label" Canvas.Left="192" Canvas.Top="168" Height="35" Width="153" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label x:Name="lblAire" Content="Label" Canvas.Left="246" Canvas.Top="42" Height="35" Width="154" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
         </Canvas>
     </Grid>

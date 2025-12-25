@@ -1,14 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\anton\\source\\repos\\CasaDomotica\\",
+  "WorkspaceRootPath": "C:\\Users\\juanm\\source\\repos\\luciamoralescornejo\\CasaDomotica\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EF64A1B4-43AB-49E2-997C-95B5D2352E81}|CasaDomotica.csproj|c:\\users\\anton\\source\\repos\\casadomotica\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EF64A1B4-43AB-49E2-997C-95B5D2352E81}|CasaDomotica.csproj|c:\\users\\juanm\\source\\repos\\luciamoralescornejo\\casadomotica\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EF64A1B4-43AB-49E2-997C-95B5D2352E81}|CasaDomotica.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EF64A1B4-43AB-49E2-997C-95B5D2352E81}|CasaDomotica.csproj|c:\\users\\anton\\source\\repos\\casadomotica\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{EF64A1B4-43AB-49E2-997C-95B5D2352E81}|CasaDomotica.csproj|c:\\users\\juanm\\source\\repos\\luciamoralescornejo\\casadomotica\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{EF64A1B4-43AB-49E2-997C-95B5D2352E81}|CasaDomotica.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF64A1B4-43AB-49E2-997C-95B5D2352E81}|CasaDomotica.csproj|c:\\users\\juanm\\source\\repos\\luciamoralescornejo\\casadomotica\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF64A1B4-43AB-49E2-997C-95B5D2352E81}|CasaDomotica.csproj|solutionrelative:app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\juanm\\source\\repos\\luciamoralescornejo\\CasaDomotica\\CasaDomotica.csproj.user||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CasaDomotica.csproj.user||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,35 +26,57 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\anton\\source\\repos\\CasaDomotica\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\anton\\source\\repos\\CasaDomotica\\MainWindow.xaml.cs",
-              "RelativeToolTip": "MainWindow.xaml.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAIwCgAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-25T16:55:57.857Z",
+              "DocumentIndex": 3,
+              "Title": "CasaDomotica.csproj.user",
+              "DocumentMoniker": "C:\\Users\\juanm\\source\\repos\\luciamoralescornejo\\CasaDomotica\\CasaDomotica.csproj.user",
+              "RelativeDocumentMoniker": "CasaDomotica.csproj.user",
+              "ToolTip": "C:\\Users\\juanm\\source\\repos\\luciamoralescornejo\\CasaDomotica\\CasaDomotica.csproj.user",
+              "RelativeToolTip": "CasaDomotica.csproj.user",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003464|",
+              "WhenOpened": "2025-12-25T16:51:44.376Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\anton\\source\\repos\\CasaDomotica\\MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\juanm\\source\\repos\\luciamoralescornejo\\CasaDomotica\\MainWindow.xaml",
               "RelativeDocumentMoniker": "MainWindow.xaml",
-              "ToolTip": "C:\\Users\\anton\\source\\repos\\CasaDomotica\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\juanm\\source\\repos\\luciamoralescornejo\\CasaDomotica\\MainWindow.xaml",
               "RelativeToolTip": "MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-12-25T18:08:58.773Z",
+              "WhenOpened": "2025-12-24T13:48:09.371Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\juanm\\source\\repos\\luciamoralescornejo\\CasaDomotica\\App.xaml.cs",
+              "RelativeDocumentMoniker": "App.xaml.cs",
+              "ToolTip": "C:\\Users\\juanm\\source\\repos\\luciamoralescornejo\\CasaDomotica\\App.xaml.cs",
+              "RelativeToolTip": "App.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-25T16:52:06.537Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\juanm\\source\\repos\\luciamoralescornejo\\CasaDomotica\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\juanm\\source\\repos\\luciamoralescornejo\\CasaDomotica\\MainWindow.xaml.cs*",
+              "RelativeToolTip": "MainWindow.xaml.cs*",
+              "ViewState": "AgIAAHgAAAAAAAAAAAAqwIoAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-24T13:48:08.895Z",
               "EditorCaption": ""
             }
           ]
