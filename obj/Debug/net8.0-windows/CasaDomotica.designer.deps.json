@@ -6,22 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v8.0": {
-      "System.Speech/10.0.1": {
-        "runtime": {
-          "lib/net8.0/System.Speech.dll": {
-            "assemblyVersion": "10.0.0.1",
-            "fileVersion": "10.0.125.57005"
-          }
-        },
-        "runtimeTargets": {
-          "runtimes/win/lib/net8.0/System.Speech.dll": {
-            "rid": "win",
-            "assetType": "runtime",
-            "assemblyVersion": "10.0.0.1",
-            "fileVersion": "10.0.125.57005"
-          }
-        }
-      }
+      "System.Speech/10.0.1": {}
     }
   },
   "libraries": {

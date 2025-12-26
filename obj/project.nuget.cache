@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "RzXSzRiHPmE=",
+  "dgSpecHash": "O5oXhNo72NE=",
   "success": true,
-  "projectFilePath": "C:\\Users\\juanm\\source\\repos\\luciamoralescornejo\\CasaDomotica\\CasaDomotica.csproj",
+  "projectFilePath": "C:\\Users\\anton\\source\\repos\\CasaDomotica\\CasaDomotica.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\juanm\\.nuget\\packages\\system.speech\\10.0.1\\system.speech.10.0.1.nupkg.sha512"
+    "C:\\Users\\anton\\.nuget\\packages\\system.speech\\10.0.1\\system.speech.10.0.1.nupkg.sha512"
   ],
   "logs": []
 }

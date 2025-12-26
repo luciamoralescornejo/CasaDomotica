@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CasaDomotica")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+49f0e7a3f2e42e54ac8a18311bccec89633049f0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dac60eed4f8bbdaf408dd5acc0c1168bdc537f94")]
 [assembly: System.Reflection.AssemblyProductAttribute("CasaDomotica")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CasaDomotica")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
