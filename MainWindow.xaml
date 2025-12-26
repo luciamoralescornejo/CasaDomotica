@@ -1,0 +1,122 @@
+﻿<Window x:Class="CasaDomotica.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CasaDomotica"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        Height="450"
+        Width="800">
+
+    <Grid>
+        <!-- Fondo -->
+        <Grid.Background>
+            <ImageBrush ImageSource="/imagenes/Fondo.png"
+                        Stretch="UniformToFill"/>
+        </Grid.Background>
+
+        <!-- Escalado general -->
+        <Viewbox Stretch="Uniform">
+            <!-- Escena base -->
+            <Canvas Width="800" Height="450">
+
+                <!-- Puerta -->
+                <Image x:Name="imgPuerta"
+                       Source="/imagenes/PuertaDesactivada.png"
+                       Width="200"
+                       Canvas.Left="350"
+                       Canvas.Top="68"/>
+
+                <!-- Sofá -->
+                <Image x:Name="imgSofa"
+                       Source="/imagenes/Sofa.png"
+                       Width="300"
+                       Canvas.Left="100"
+                       Canvas.Top="100"/>
+
+                <!-- Mesa -->
+                <Image x:Name="imgMesa"
+                       Source="/imagenes/Mesa.png"
+                       Width="300"
+                       Canvas.Left="250"
+                       Canvas.Top="170"/>
+
+                <!-- Aire acondicionado -->
+                <Grid Canvas.Left="120" Canvas.Top="-40">
+                    <Image x:Name="imgAire"
+                           Source="/imagenes/AireDesactivado.png"
+                           Width="200"/>
+
+                    <TextBlock x:Name="TxtTemperatura"
+                               Text="22°C"
+                               FontSize="15"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Padding="2"
+                               Visibility="Hidden"/>
+                </Grid>
+
+                <!-- Lámpara -->
+                <Image x:Name="imgLuz"
+                       Source="/imagenes/LuzDesactivada.png"
+                       Width="200"
+                       Canvas.Left="10"
+                       Canvas.Top="100"/>
+
+                <!-- Mueble -->
+                <Image x:Name="imgMueble"
+                       Source="/imagenes/Mueble.png"
+                       Width="280"
+                       Canvas.Right="0"
+                       Canvas.Top="150"/>
+
+                <!-- Tele -->
+                <Image x:Name="imgTele"
+                       Source="/imagenes/TeleDesactivada.png"
+                       Width="200"
+                       Canvas.Right="20"
+                       Canvas.Top="130"/>
+
+                <!-- Reloj -->
+                <Image x:Name="imgReloj"
+                       Source="/imagenes/Reloj.png"
+                       Width="100"
+                       Canvas.Right="150"
+                       Canvas.Top="70"/>
+
+                <!-- Paco -->
+                <Image x:Name="imgPaco"
+                       Source="/imagenes/PacoDesactivado.png"
+                       Width="90"
+                       Canvas.Right="290"
+                       Canvas.Bottom="130"/>
+
+                <!-- Textos -->
+                <Label x:Name="lblTexto"
+                       Content="Label"
+                       Canvas.Left="192"
+                       Canvas.Top="130"
+                       Width="153"
+                       Height="35"/>
+
+                <Label x:Name="lblTextoPaco"
+                       Content="Label"
+                       Canvas.Left="192"
+                       Canvas.Top="168"
+                       Width="153"
+                       Height="35"/>
+
+                <Label x:Name="lblAire"
+                       Content="Label"
+                       Canvas.Left="232"
+                       Canvas.Top="42"
+                       Width="48"
+                       Height="25" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+            </Canvas>
+        </Viewbox>
+    </Grid>
+</Window>
