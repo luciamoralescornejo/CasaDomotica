@@ -5,10 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CasaDomotica"
         mc:Ignorable="d"
-        Title="MainWindow"
-        Height="450"
-        Width="800">
-
+        Title="MainWindow" Height="450" Width="800">
     <Grid>
         <!-- Fondo -->
         <Grid.Background>
@@ -16,105 +13,90 @@
                         Stretch="UniformToFill"/>
         </Grid.Background>
 
-        <!-- Escalado general -->
         <Viewbox Stretch="Uniform">
-            <!-- Escena base -->
-            <Canvas Width="800" Height="450">
+            <Canvas  Width="800" Height="450">
 
-                <!-- Puerta -->
-                <Image x:Name="imgPuerta"
-                       Source="/imagenes/PuertaDesactivada.png"
-                       Width="200"
-                       Canvas.Left="350"
-                       Canvas.Top="68"/>
+                <!-- Puerta cerrada -->
+                <Image x:Name="imgPuerta" Source="/imagenes/Puerta00.png"
+               Width="200"
+               Canvas.Left="350"
+               Canvas.Top="68"/>
 
                 <!-- Sofá -->
-                <Image x:Name="imgSofa"
-                       Source="/imagenes/Sofa.png"
-                       Width="300"
-                       Canvas.Left="100"
-                       Canvas.Top="100"/>
+                <Image x:Name="imgSofa" Source="/imagenes/Sofa.png"
+               Width="300"
+               Canvas.Left="100"
+               Canvas.Top="100"/>
 
                 <!-- Mesa -->
-                <Image x:Name="imgMesa"
-                       Source="/imagenes/Mesa.png"
-                       Width="300"
-                       Canvas.Left="250"
-                       Canvas.Top="170"/>
+                <Image x:Name="imgMesa" Source="/imagenes/Mesa.png"
+                   Width="300"
+                   Canvas.Left="250"
+                   Canvas.Top="170"/>
 
-                <!-- Aire acondicionado -->
+                <!-- Aire acondicionado apagado -->
                 <Grid Canvas.Left="120" Canvas.Top="-40">
-                    <Image x:Name="imgAire"
-                           Source="/imagenes/AireDesactivado.png"
-                           Width="200"/>
+                    <Image x:Name="imgAire" Source="/imagenes/Aire00.png"
+                   Width="200"/>
 
-                    <TextBlock x:Name="TxtTemperatura"
-                               Text="22°C"
-                               FontSize="15"
-                               FontWeight="Bold"
-                               Foreground="White"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               Padding="2"
-                               Visibility="Hidden"/>
+                    <TextBlock x:Name="TxtTemperatura" 
+                       Text="22°C"
+                       FontSize="15"
+                       FontWeight="Bold"
+                       Foreground="White"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Padding="2"
+                       Visibility="Hidden"/>
                 </Grid>
 
                 <!-- Lámpara -->
-                <Image x:Name="imgLuz"
-                       Source="/imagenes/LuzDesactivada.png"
-                       Width="200"
-                       Canvas.Left="10"
-                       Canvas.Top="100"/>
+                <Image x:Name="imgLuz" Source="/imagenes/Luz00.png"
+               Width="200"
+               Canvas.Left="10"
+               Canvas.Top="100"/>
 
                 <!-- Mueble -->
-                <Image x:Name="imgMueble"
-                       Source="/imagenes/Mueble.png"
-                       Width="280"
-                       Canvas.Right="0"
-                       Canvas.Top="150"/>
+                <Image x:Name="imgMueble" Source="/imagenes/Mueble.png"
+               Width="280"
+               Canvas.Right="0"
+               Canvas.Top="150"/>
 
                 <!-- Tele -->
-                <Image x:Name="imgTele"
-                       Source="/imagenes/TeleDesactivada.png"
-                       Width="200"
-                       Canvas.Right="20"
-                       Canvas.Top="130"/>
+                <Image x:Name="imgTele" Source="/imagenes/Tele00.png"
+               Width="200"
+               Canvas.Right="20"
+               Canvas.Top="130"/>
 
                 <!-- Reloj -->
-                <Image x:Name="imgReloj"
-                       Source="/imagenes/Reloj.png"
-                       Width="100"
-                       Canvas.Right="150"
-                       Canvas.Top="70"/>
+                <Image x:Name="imgReloj" Source="/imagenes/Reloj.png"
+               Width="100"
+               Canvas.Right="150"
+               Canvas.Top="0" RenderTransformOrigin="0.266,0.746"/>
+
+                <!-- Temporizador-->
+                <Grid Canvas.Right="150" Canvas.Top="100">
+                    <Image x:Name="imgTemporizador"
+                           Source="/imagenes/Temporizador00.png"
+                           Width="100"/>
+                    <TextBlock x:Name="lblNumerosTemp"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Foreground="Black"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center" Width="30" Margin="60,0,0,0" RenderTransformOrigin="0.481,0.483"/>
+                </Grid>
+
 
                 <!-- Paco -->
-                <Image x:Name="imgPaco"
-                       Source="/imagenes/PacoDesactivado.png"
-                       Width="90"
-                       Canvas.Right="290"
-                       Canvas.Bottom="130"/>
+                <Image x:Name="imgPaco" Source="/imagenes/Paco00.png"
+               Width="90"
+               Canvas.Right="290"
+               Canvas.Bottom="130"/>
 
-                <!-- Textos -->
-                <Label x:Name="lblTexto"
-                       Content="Label"
-                       Canvas.Left="192"
-                       Canvas.Top="130"
-                       Width="153"
-                       Height="35"/>
-
-                <Label x:Name="lblTextoPaco"
-                       Content="Label"
-                       Canvas.Left="192"
-                       Canvas.Top="168"
-                       Width="153"
-                       Height="35"/>
-
-                <Label x:Name="lblAire"
-                       Content="Label"
-                       Canvas.Left="232"
-                       Canvas.Top="42"
-                       Width="48"
-                       Height="25" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <!-- Textos Provisionales-->
+                <Label x:Name="lblTexto" Content="Label" Canvas.Left="192" Canvas.Top="130" Height="35" Width="153"/>
+                <Label x:Name="lblTextoPaco" Content="Label" Canvas.Left="192" Canvas.Top="168" Height="35" Width="153" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
             </Canvas>
         </Viewbox>

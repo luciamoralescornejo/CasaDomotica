@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Speech.Recognition;
@@ -14,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CasaDomotica
@@ -24,66 +26,96 @@ namespace CasaDomotica
     public partial class MainWindow : Window
     {
         public const string rutaFija = "..\\..\\..\\imagenes\\";
-        
+        public bool escuchando = false;
+        public string elemento = "";
+
+        public Dictionary<string, Image> elementos = new Dictionary<string, Image>();
+        public Dictionary<string, string> acciones = new Dictionary<string, string>();
+
+        private SpeechRecognitionEngine recognizer = new SpeechRecognitionEngine();
+        // NUEVO: temporizador
+        private DispatcherTimer timerTemporizador;
+        private int tiempoRestante;
+
         public MainWindow()
         {
             InitializeComponent();
+            ConfigDiccionarios();
+            ConfigReconocedor();
 
-            SpeechRecognitionEngine recognizer = new SpeechRecognitionEngine();
-            GrammarBuilder gb = new GrammarBuilder();
-            gb.Append("Paco");
-            Grammar grammar = new Grammar(gb);
-            recognizer.LoadGrammar(grammar);
-            recognizer.SetInputToDefaultAudioDevice();
+            // Dentro del constructor MainWindow()
+            timerTemporizador = new DispatcherTimer();
+            timerTemporizador.Interval = TimeSpan.FromSeconds(1);
+            timerTemporizador.Tick += TimerTemporizador_Tick;
+            // Mostrar el tiempo inicial
+            lblNumerosTemp.Text = "";
 
-            string frase;
-            recognizer.SpeechRecognized += (s, e) =>
+        }
+        private void TimerTemporizador_Tick(object sender, EventArgs e)
+        {
+            if (tiempoRestante > 0)
             {
-                if (e.Result.Confidence > 0.60)
-                {
-                    frase = e.Result.Text.ToString();
-                    lblTextoPaco.Content = frase;
-                    Escuchar();
-                    imgPaco.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "PacoActivado.png") as ImageSource;
-                }
-            };
+                tiempoRestante--;
+                lblNumerosTemp.Text = tiempoRestante.ToString("D2");
 
-            recognizer.RecognizeAsync(RecognizeMode.Multiple);
+                // Efecto visual del temporizador
+                if (tiempoRestante <= 10)
+                    imgTemporizador.Opacity = imgTemporizador.Opacity == 1 ? 0.5 : 1;
+                else
+                    imgTemporizador.Opacity = 1;
+            }
+            else
+            {
+                timerTemporizador.Stop();
+                lblNumerosTemp.Text = "¡Fin!";
+                imgTemporizador.Opacity = 1;
+            }
         }
 
-        public void Escuchar()
+        public void ConfigDiccionarios()
         {
-            SpeechRecognitionEngine recognizer = new SpeechRecognitionEngine();
+            // Diccionario de Elementos
+            elementos.Add("Puerta", imgPuerta);
+            elementos.Add("Luz", imgLuz);
+            elementos.Add("Aire", imgAire);
+            elementos.Add("Temporizador", imgTemporizador);
+            elementos.Add("Television", imgTele);
+            elementos.Add("Tiempo", imgTele);
+            elementos.Add("Noticias", imgTele);
+            elementos.Add("YouTube", imgTele);
 
+            // Diccionario de acciones
+            acciones.Add("enciende", "01");
+            acciones.Add("pon", "01");
+            acciones.Add("abre", "01");
+            acciones.Add("cierra", "00");
+            acciones.Add("quita", "00");
+            acciones.Add("apaga", "00");
+        }
+
+        private void ConfigReconocedor()
+        {
+            // Grammar para la llamada Paco
+            GrammarBuilder gbPaco = new GrammarBuilder();
+            gbPaco.Append("Paco");
+
+            Grammar grammarPaco = new Grammar(gbPaco);
+
+            // Grammar para los comandos
             Choices comandos = new Choices();
-            comandos.Add(new string[] { "enciende", "abre", "apaga", "cierra", "pon", "quita" });
+            comandos.Add(acciones.Keys.ToArray<string>());
             Choices elementos = new Choices();
-            elementos.Add(new string[] { "puerta", "luz", "aire", "tele", "tiempo", "noticias", "youtube" });
+            elementos.Add(this.elementos.Keys.ToArray());
 
-            GrammarBuilder gb = new GrammarBuilder();
-            gb.Append(comandos);
-            gb.Append(elementos);
-            Grammar grammar = new Grammar(gb);
-            recognizer.LoadGrammar(grammar);
-            recognizer.SetInputToDefaultAudioDevice();
+            GrammarBuilder gbComandos = new GrammarBuilder();
+            gbComandos.Append(comandos);
+            gbComandos.Append(elementos);
 
-            string frase;
-            recognizer.SpeechRecognized += (s, e) =>
-            {
-                    frase = e.Result.Text.ToString();
-                    lblTexto.Content = frase;
-                    EjecutarComando(frase);
-            };
+            Grammar grammarComandos = new Grammar(gbComandos);
 
-            recognizer.RecognizeAsync(RecognizeMode.Single);
-
-        }
-        public string EscucharNumeros()
-        {
-            SpeechRecognitionEngine recognizer = new SpeechRecognitionEngine();
-
+            // Grammar de numeros
             Choices numeros = new Choices();
-            string[] numerosDicionario = new string[]
+            numeros.Add(new string[]
             {
                 "1","2","3","4","5","6","7","8","9","10",
                 "11","12","13","14","15","16","17","18","19","20",
@@ -91,124 +123,147 @@ namespace CasaDomotica
                 "31","32","33","34","35","36","37","38","39","40",
                 "41","42","43","44","45","46","47","48","49","50",
                 "51","52","53","54","55","56","57","58","59","60",
-               
-            };
-            numeros.Add(numerosDicionario);
-            
-            GrammarBuilder gb = new GrammarBuilder();
-            gb.Append(numeros);
-            Grammar grammar = new Grammar(gb);
-            recognizer.LoadGrammar(grammar);
-            recognizer.SetInputToDefaultAudioDevice();
 
-            string frase = "";
+            });
+            GrammarBuilder gbNumeros = new GrammarBuilder();
+            gbNumeros.Append(numeros);
+            Grammar grammarNumeros = new Grammar(gbNumeros);
+
+            // Añadimos las dos Grammar y deshabilitamos la de comandos
+            recognizer.LoadGrammar(grammarComandos);
+            recognizer.LoadGrammar(grammarPaco);
+            recognizer.LoadGrammar(grammarNumeros);
+            grammarNumeros.Enabled = false;
+            grammarComandos.Enabled = false;
+            recognizer.EndSilenceTimeout= TimeSpan.FromSeconds(0.1);
+            recognizer.SetInputToDefaultAudioDevice();
+            // Logica de escucha
+            string frase, accion, numero;
+            escuchando = false;
             recognizer.SpeechRecognized += (s, e) =>
             {
-                frase = e.Result.Text.ToString();
-            };
-             
-            recognizer.RecognizeAsync(RecognizeMode.Single);
-            return frase;
-        }
-        public void EjecutarComando(string frase)
-        {
-            string[] fraseSeparada = frase.Split(' ');
-            
-            switch (fraseSeparada[1])
-            {
-        
-                case "puerta":
-                    ComandoPuerta(fraseSeparada);
-                    break;
-                case "aire":
 
+                if (!escuchando && e.Result.Grammar == grammarPaco &&
+                e.Result.Confidence > 0.50)
+                {
+                    escuchando = true;
+                    frase = e.Result.Text.ToString();
+                    lblTextoPaco.Content = frase;
 
-                    if (fraseSeparada[0] == "enciende")
+                    // Cambiamos de estado
+                    imgPaco.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "Paco01.png") as ImageSource;
+                    grammarPaco.Enabled = false;
+                    grammarComandos.Enabled = true;
+                }
+                else if (escuchando && e.Result.Grammar == grammarComandos &&
+                e.Result.Confidence > 0.30)
+                {
+                    frase = e.Result.Text.ToString();
+                    lblTexto.Content = frase;
+                    string[] fraseSplit = frase.Split(' ');
+                    accion = fraseSplit[0];
+                    elemento = fraseSplit[1];
+                    if ((elemento == "Aire" || elemento == "Temporizador") && accion=="pon")
                     {
-                        imgAire.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "AireActivado.png") as ImageSource;
-                    }
-                    else if (fraseSeparada[0] == "apaga")
-                    {
-                        imgAire.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "AireDesactivado.png") as ImageSource;
-                    }
-                    else if (fraseSeparada[0] == "pon") {
-                        string numero = EscucharNumeros();
-                        imgAire.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "AireActivado.png") as ImageSource;
-                        TxtTemperatura.Text = numero;
-                        lblAire.Content = numero;
-                          
-                    }
-
-                    break;
-                case "luz":
-                    if (fraseSeparada[0] == "enciende")
-                    {
-                        imgLuz.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "LuzActivada.png") as ImageSource;
+                        EjecutarComando(accion);
+                        grammarComandos.Enabled = false;
+                        grammarNumeros.Enabled = true;
                     }
                     else
                     {
-                        imgLuz.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "LuzDesactivada.png") as ImageSource;
+                        EjecutarComando(accion);
+                        // Cambiamos de estado
+                        escuchando = false;
+                        grammarComandos.Enabled = false;
+                        grammarPaco.Enabled = true;
+                        imgPaco.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "Paco00.png") as ImageSource;
+                        
                     }
-                    break;
-                case "tele":
-                    if (fraseSeparada[0] == "enciende" || fraseSeparada[0] == "pon")
-                    {
-                        imgTele.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "TeleSinSenal.png") as ImageSource;
-                    }
-                    else if (fraseSeparada[0] == "apaga" || fraseSeparada[0] == "quita")
-                    {
-                        imgTele.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "TeleDesactivada.png") as ImageSource;
-                    }
-                    break;
-                case "tiempo":
-                    if (fraseSeparada[0] == "enciende" || fraseSeparada[0] == "pon")
-                    {
-                        imgTele.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "TeleTiempo.png") as ImageSource;
-                    }
-                    else if (fraseSeparada[0] == "apaga" || fraseSeparada[0] == "quita")
-                    {
-                        imgTele.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "TeleDesactivada.png") as ImageSource;
-                    }
-                    break;
-                case "youtube":
-                    if (fraseSeparada[0] == "enciende" || fraseSeparada[0] == "pon")
-                    {
-                        imgTele.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "TeleYouTube.png") as ImageSource;
-                    }
-                    else if (fraseSeparada[0] == "apaga" || fraseSeparada[0] == "quita")
-                    {
-                        imgTele.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "TeleDesactivada.png") as ImageSource;
-                    }
-                    break;
-                case "noticias":
-                    if (fraseSeparada[0] == "enciende" || fraseSeparada[0] == "pon")
-                    {
-                        imgTele.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "TeleNoticias.png") as ImageSource;
-                    }
-                    else if (fraseSeparada[0] == "apaga" || fraseSeparada[0] == "quita")
-                    {
-                        imgTele.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "TeleDesactivada.png") as ImageSource;
-                    }
-                    break;
 
-            }
-            imgPaco.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "PacoDesactivado.png") as ImageSource;
-            lblTextoPaco.Content = "aa";
-        }
-        public void ComandoPuerta(string[] fraseSeparada)
-        {
-            if (fraseSeparada[0] == "abre")
-            {
-                imgPuerta.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "PuertaActivada.png") as ImageSource;
-            }
-            else
-            {
-                imgPuerta.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "PuertaDesactivada.png") as ImageSource;
-            }
-       
+                }
+                else if (escuchando && e.Result.Grammar == grammarNumeros)
+                {
+                    numero = e.Result.Text.ToString();
+
+                    if (elemento == "Aire")
+                    {
+                        // Actualizamos la misma etiqueta TxtTemperatura
+                        TxtTemperatura.Text = numero + "°C";
+                        TxtTemperatura.Visibility = Visibility.Visible;
+                    }
+
+                    if (elemento == "Temporizador")
+                    {
+                        // Guardamos el número que dijiste
+                        tiempoRestante = int.Parse(numero);
+                        lblNumerosTemp.Text = tiempoRestante.ToString("D2");
+
+                        // Reiniciar el temporizador
+                        timerTemporizador.Stop();
+                        timerTemporizador.Start();
+                    }
+
+                    escuchando = false;
+                    grammarNumeros.Enabled = false;
+                    grammarPaco.Enabled = true;
+                    imgPaco.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "Paco00.png") as ImageSource;
+                }
+
+                else
+                {
+                    lblTexto.Content = "No entiendo";
+                }
+            };
+            recognizer.RecognizeAsync(RecognizeMode.Multiple);
         }
 
         
+        public void EjecutarComando(string accion)
+        {
+
+            Image img = elementos[elemento];
+            string ruta = rutaFija + img.Name.Substring(3);
+            if (img.Name == "imgTele" && elemento != "Television")
+            {
+                ruta += accion == "quita" ? "01" : elemento switch
+                {
+                    "Noticias" => "10",
+                    "Tiempo" => "11",
+                    "YouTube" => "12",
+                    _ => "01",
+                };
+            }
+            else
+            {
+                ruta += acciones[accion];
+            }
+            // Cambios específicos según elemento
+            if (elemento == "Aire")
+            {
+                if (acciones[accion] == "01") // Encender
+                {
+                    TxtTemperatura.Visibility = Visibility.Visible;
+                    if (TxtTemperatura.Text == "")
+                        TxtTemperatura.Text = "22°C"; // valor inicial
+                }
+                else if (acciones[accion] == "00") // Apagar
+                {
+                    TxtTemperatura.Visibility = Visibility.Hidden;
+                }
+            }
+
+
+            if (elemento == "Temporizador")
+            {
+                if (acciones[accion] == "00")
+                {
+                    lblNumerosTemp.Text = "";
+                }
+            }
+
+            // Actualizar imagen
+            img.Source = new ImageSourceConverter().ConvertFromString(ruta + ".png") as ImageSource;
+        }
 
     }
     

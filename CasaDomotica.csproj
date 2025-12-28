@@ -9,22 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="imagenes\AireDesactivado.png" />
     <None Remove="imagenes\Fondo.png" />
-    <None Remove="imagenes\LuzActivada.png" />
-    <None Remove="imagenes\LuzDesactivada.png" />
     <None Remove="imagenes\Mesa.png" />
     <None Remove="imagenes\Mueble.png" />
-    <None Remove="imagenes\PacoActivado.png" />
-    <None Remove="imagenes\PacoDesactivado.png" />
-    <None Remove="imagenes\PuertaActivada.png" />
-    <None Remove="imagenes\PuertaDesactivada.png" />
     <None Remove="imagenes\Reloj.png" />
-    <None Remove="imagenes\Sofa.png" />
-    <None Remove="imagenes\TeleDesactivada.png" />
-    <None Remove="imagenes\TeleNoticias.png" />
-    <None Remove="imagenes\TeleTiempo.png" />
-    <None Remove="imagenes\TeleYouTube.png" />
+    
   </ItemGroup>
 
   <ItemGroup>
@@ -32,16 +21,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="imagenes\AireDesactivado.png">
+    <Resource Include="imagenes\Aire00.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="imagenes\Fondo.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="imagenes\LuzActivada.png">
+    <Resource Include="imagenes\Luz01.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="imagenes\LuzDesactivada.png">
+    <Resource Include="imagenes\Luz00.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="imagenes\Mesa.png">
@@ -50,34 +39,37 @@
     <Resource Include="imagenes\Mueble.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="imagenes\PacoActivado.png">
+      <Resource Include="imagenes\Reloj.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="imagenes\PacoDesactivado.png">
+    <Resource Include="imagenes\Paco01.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="imagenes\PuertaActivada.png">
+    <Resource Include="imagenes\Paco00.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="imagenes\PuertaDesactivada.png">
+    <Resource Include="imagenes\Puerta01.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="imagenes\Reloj.png">
+    <Resource Include="imagenes\Puerta00.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="imagenes\Temporizador00.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="imagenes\Sofa.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="imagenes\TeleDesactivada.png">
+    <Resource Include="imagenes\Tele00.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="imagenes\TeleNoticias.png">
+    <Resource Include="imagenes\Tele10.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="imagenes\TeleTiempo.png">
+    <Resource Include="imagenes\Tele11.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="imagenes\TeleYouTube.png">
+    <Resource Include="imagenes\Tele12.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

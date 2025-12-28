@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "ipZIInV9XnA=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\anago\\OneDrive\\Documentos\\CasaDomotica-AnadirSenal\\CasaDomotica.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\anago\\.nuget\\packages\\system.speech\\10.0.1\\system.speech.10.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
