@@ -33,7 +33,7 @@ namespace CasaDomotica
         public bool escuchando = false;
         public string elemento = "";
 
-       
+
 
         public Dictionary<string, Image> elementos = new Dictionary<string, Image>();
         public Dictionary<string, string> acciones = new Dictionary<string, string>();
@@ -121,7 +121,7 @@ namespace CasaDomotica
             recognizer.LoadGrammar(grammarNumeros);
             grammarNumeros.Enabled = false;
             grammarComandos.Enabled = false;
-            recognizer.EndSilenceTimeout= TimeSpan.FromSeconds(0.1);
+            recognizer.EndSilenceTimeout = TimeSpan.FromSeconds(0.1);
             recognizer.SetInputToDefaultAudioDevice();
             // Logica de escucha
             string frase, accion, numero;
@@ -149,7 +149,7 @@ namespace CasaDomotica
                     string[] fraseSplit = frase.Split(' ');
                     accion = fraseSplit[0];
                     elemento = fraseSplit[1];
-                    if ((elemento == "Aire" || elemento == "Temporizador") && accion=="pon")
+                    if ((elemento == "Aire" || elemento == "Temporizador") && accion == "pon")
                     {
                         EjecutarComando(accion);
                         grammarComandos.Enabled = false;
@@ -163,44 +163,47 @@ namespace CasaDomotica
                         grammarComandos.Enabled = false;
                         grammarPaco.Enabled = true;
                         imgPaco.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "Paco00.png") as ImageSource;
-                        
+
                     }
 
-                }else if (escuchando && e.Result.Grammar== grammarNumeros)
+                }
+                else if (escuchando && e.Result.Grammar == grammarNumeros)
                 {
                     numero = e.Result.Text.ToString();
-                    if (elemento=="Aire")
-                        // AQUI VA LA LOGICA CUANDO SE ACCIONA EL  aire
+                    if (elemento == "Aire")
+                    // AQUI VA LA LOGICA CUANDO SE ACCIONA EL  aire
                     {
-                        lblNumeros.Content = numero;
-
+                        TxtTemperatura.Text = numero + "°C";
+                        TxtTemperatura.Visibility = Visibility.Visible;
                     }
-                    if (elemento=="Temporizador")
+
+
+                    if (elemento == "Temporizador")
                     {
                         // LOGICA DEL TEMPORIZADOR
                         IniciarTemporizador(Int32.Parse(numero));
 
                         lblNumerosTemp.Content = numero;
                     }
-                    
-                    escuchando= false;
+
+                    escuchando = false;
                     grammarNumeros.Enabled = false;
                     grammarPaco.Enabled = true;
                     imgPaco.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "Paco00.png") as ImageSource;
                 }
                 else
                 {
- 
+
                     // por si no lo entienede que suene un sonido de error
                     sonidoError.Play();
 
-                    
+
                 }
             };
             recognizer.RecognizeAsync(RecognizeMode.Multiple);
         }
 
-        
+
         public void EjecutarComando(string accion)
         {
 
@@ -222,13 +225,15 @@ namespace CasaDomotica
             }
             if (acciones[accion] == "00")
             {
-                if (elemento=="Aire")
+                if (acciones[accion] == "01")
                 {
-                    lblNumeros.Content = "";
+                    TxtTemperatura.Visibility = Visibility.Visible;
+                    if (TxtTemperatura.Text == "")
+                        TxtTemperatura.Text = "22°C";
                 }
-                if (elemento=="Temporizador")
+                else if (acciones[accion] == "00")
                 {
-                    imgTemporizador.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "Temporizador" + "00" + ".png") as ImageSource;
+                    TxtTemperatura.Visibility = Visibility.Hidden;
                 }
             }
             img.Source = new ImageSourceConverter().ConvertFromString(ruta + ".png") as ImageSource;
@@ -250,27 +255,27 @@ namespace CasaDomotica
         private void Temporizador_Tick(object sender, EventArgs e)
         {
             // inicializo las variables 
-        
-            
+
+
             //calculo cuanto tiempo ha pasado 
             TimeSpan tiempoRestante = duracionTotal - reloj.Elapsed;
 
-            string numImg = tiempoRestante.Seconds%12 < 10 ? "0"+tiempoRestante.Seconds%12: ""+tiempoRestante.Seconds%12;
+            string numImg = tiempoRestante.Seconds % 12 < 10 ? "0" + tiempoRestante.Seconds % 12 : "" + tiempoRestante.Seconds % 12;
             if (tiempoRestante <= TimeSpan.Zero)
             {
                 temporizador.Stop();
-                imgTemporizador.Source = new ImageSourceConverter().ConvertFromString(rutaFija +"Temporizador"+"00"+".png") as ImageSource;
+                imgTemporizador.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "Temporizador" + "00" + ".png") as ImageSource;
 
                 // AQUI SE REPORODUCIRA UNA ALARMA, OJO SI LO QUEREIS CAMBIARLO SOLO ADMITE .WAV
-  
+
                 sonidoAlarma.Play();
                 return;
             }
-            
-            imgTemporizador.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "Temporizador" +numImg+ ".png") as ImageSource;
+
+            imgTemporizador.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "Temporizador" + numImg + ".png") as ImageSource;
 
         }
 
     }
-    
+
 }
