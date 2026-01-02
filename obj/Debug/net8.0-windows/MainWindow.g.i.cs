@@ -153,14 +153,6 @@ namespace CasaDomotica {
         #line default
         #line hidden
         
-        
-        #line 82 "..\..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.Label lblAire;
-        
-        #line default
-        #line hidden
-        
         private bool _contentLoaded;
         
         /// <summary>
@@ -232,9 +224,6 @@ namespace CasaDomotica {
             return;
             case 14:
             this.lblTextoPaco = ((System.Windows.Controls.Label)(target));
-            return;
-            case 13:
-            this.lblAire = ((System.Windows.Controls.Label)(target));
             return;
             }
             this._contentLoaded = true;

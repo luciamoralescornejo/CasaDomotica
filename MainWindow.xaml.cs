@@ -1,7 +1,10 @@
 ﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics;
 using System.Linq;
+using System.Media;
 using System.Net.NetworkInformation;
 using System.Speech.Recognition;
 using System.Text;
@@ -15,7 +18,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+
 
 namespace CasaDomotica
 {
@@ -28,10 +33,25 @@ namespace CasaDomotica
         public bool escuchando = false;
         public string elemento = "";
 
+       
+
         public Dictionary<string, Image> elementos = new Dictionary<string, Image>();
         public Dictionary<string, string> acciones = new Dictionary<string, string>();
 
         private SpeechRecognitionEngine recognizer = new SpeechRecognitionEngine();
+
+        // DECLARO VARIABLES PARA EL TEMPORIZADOR 
+
+        private Stopwatch reloj;
+        private TimeSpan duracionTotal;
+        private DispatcherTimer temporizador;
+
+        // inicializo algunos sonidos
+        private SoundPlayer sonidoAlarma = new SoundPlayer("..\\..\\..\\Sonidos\\" + "alarma.wav");
+        private SoundPlayer sonidoError = new SoundPlayer("..\\..\\..\\Sonidos\\" + "error.wav");
+
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -150,12 +170,16 @@ namespace CasaDomotica
                 {
                     numero = e.Result.Text.ToString();
                     if (elemento=="Aire")
+                        // AQUI VA LA LOGICA CUANDO SE ACCIONA EL  aire
                     {
                         lblNumeros.Content = numero;
 
                     }
                     if (elemento=="Temporizador")
                     {
+                        // LOGICA DEL TEMPORIZADOR
+                        IniciarTemporizador(Int32.Parse(numero));
+
                         lblNumerosTemp.Content = numero;
                     }
                     
@@ -166,7 +190,11 @@ namespace CasaDomotica
                 }
                 else
                 {
-                    lblTexto.Content = "No entiendo";
+ 
+                    // por si no lo entienede que suene un sonido de error
+                    sonidoError.Play();
+
+                    
                 }
             };
             recognizer.RecognizeAsync(RecognizeMode.Multiple);
@@ -200,10 +228,46 @@ namespace CasaDomotica
                 }
                 if (elemento=="Temporizador")
                 {
-                    lblNumerosTemp.Content = "";
+                    imgTemporizador.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "Temporizador" + "00" + ".png") as ImageSource;
                 }
             }
             img.Source = new ImageSourceConverter().ConvertFromString(ruta + ".png") as ImageSource;
+
+        }
+        public void IniciarTemporizador(int segundos)
+        {
+            duracionTotal = TimeSpan.FromSeconds(segundos);
+            reloj = Stopwatch.StartNew();
+
+            temporizador = new DispatcherTimer();
+
+            // cuanto menos intervalo tenga más precisión tiene.
+            temporizador.Interval = TimeSpan.FromMilliseconds(200);
+            temporizador.Tick += Temporizador_Tick;
+            temporizador.Start();
+        }
+
+        private void Temporizador_Tick(object sender, EventArgs e)
+        {
+            // inicializo las variables 
+        
+            
+            //calculo cuanto tiempo ha pasado 
+            TimeSpan tiempoRestante = duracionTotal - reloj.Elapsed;
+
+            string numImg = tiempoRestante.Seconds%12 < 10 ? "0"+tiempoRestante.Seconds%12: ""+tiempoRestante.Seconds%12;
+            if (tiempoRestante <= TimeSpan.Zero)
+            {
+                temporizador.Stop();
+                imgTemporizador.Source = new ImageSourceConverter().ConvertFromString(rutaFija +"Temporizador"+"00"+".png") as ImageSource;
+
+                // AQUI SE REPORODUCIRA UNA ALARMA, OJO SI LO QUEREIS CAMBIARLO SOLO ADMITE .WAV
+  
+                sonidoAlarma.Play();
+                return;
+            }
+            
+            imgTemporizador.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "Temporizador" +numImg+ ".png") as ImageSource;
 
         }
 
