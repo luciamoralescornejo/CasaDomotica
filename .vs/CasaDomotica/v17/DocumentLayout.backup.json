@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\juanm\\source\\repos\\CasaDomotica\\",
+  "WorkspaceRootPath": "C:\\Users\\anton\\source\\repos\\CasaDomotica\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EF64A1B4-43AB-49E2-997C-95B5D2352E81}|CasaDomotica.csproj|c:\\users\\juanm\\source\\repos\\casadomotica\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EF64A1B4-43AB-49E2-997C-95B5D2352E81}|CasaDomotica.csproj|c:\\users\\anton\\source\\repos\\casadomotica\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EF64A1B4-43AB-49E2-997C-95B5D2352E81}|CasaDomotica.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EF64A1B4-43AB-49E2-997C-95B5D2352E81}|CasaDomotica.csproj|c:\\users\\juanm\\source\\repos\\casadomotica\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{EF64A1B4-43AB-49E2-997C-95B5D2352E81}|CasaDomotica.csproj|c:\\users\\anton\\source\\repos\\casadomotica\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{EF64A1B4-43AB-49E2-997C-95B5D2352E81}|CasaDomotica.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
@@ -18,38 +18,36 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\juanm\\source\\repos\\CasaDomotica\\MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\anton\\source\\repos\\CasaDomotica\\MainWindow.xaml",
               "RelativeDocumentMoniker": "MainWindow.xaml",
-              "ToolTip": "C:\\Users\\juanm\\source\\repos\\CasaDomotica\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\anton\\source\\repos\\CasaDomotica\\MainWindow.xaml",
               "RelativeToolTip": "MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-12-26T16:02:20.598Z"
+              "WhenOpened": "2026-01-08T11:59:46.757Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\juanm\\source\\repos\\CasaDomotica\\MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\anton\\source\\repos\\CasaDomotica\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\juanm\\source\\repos\\CasaDomotica\\MainWindow.xaml.cs*",
+              "ToolTip": "C:\\Users\\anton\\source\\repos\\CasaDomotica\\MainWindow.xaml.cs*",
               "RelativeToolTip": "MainWindow.xaml.cs*",
-              "ViewState": "AgIAAKEAAAAAAAAAAAAuwLwAAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAANMAAAAAAAAAAAAowJUAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-26T12:38:19.216Z",
+              "WhenOpened": "2025-12-26T18:25:04.398Z",
               "EditorCaption": ""
             }
           ]

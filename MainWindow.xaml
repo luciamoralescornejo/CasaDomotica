@@ -12,15 +12,15 @@
             <ImageBrush ImageSource="/imagenes/Fondo.png"
                         Stretch="UniformToFill"/>
         </Grid.Background>
-        
+
         <Viewbox Stretch="Uniform">
             <Canvas  Width="800" Height="450">
 
                 <!-- Puerta cerrada -->
                 <Image x:Name="imgPuerta" Source="/imagenes/Puerta00.png"
                Width="200"
-               Canvas.Left="350"
-               Canvas.Top="68"/>
+               Canvas.Left="345"
+               Canvas.Top="75" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
                 <!-- Sofá -->
                 <Image x:Name="imgSofa" Source="/imagenes/Sofa.png"
@@ -79,11 +79,10 @@
                Width="90"
                Canvas.Right="290"
                Canvas.Bottom="130"/>
-                
+
                 <!-- Textos Provisionales-->
                 <Label x:Name="lblTexto" Content="Label" Canvas.Left="192" Canvas.Top="130" Height="35" Width="153"/>
-                <Label x:Name="lblNumeros" Content="Label" Canvas.Left="174" Canvas.Top="42" Height="36" Width="152"/>
-                <Label x:Name="lblNumerosTemp" Content="Label" Canvas.Left="555" Canvas.Top="68" Height="36" Width="152"/>
+                <Label x:Name="lblNumerosTemp" Content="label" Canvas.Left="555" Canvas.Top="68" Height="36" Width="152"/>
                 <Label x:Name="lblTextoPaco" Content="Label" Canvas.Left="192" Canvas.Top="168" Height="35" Width="153" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
             </Canvas>

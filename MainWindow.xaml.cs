@@ -66,9 +66,10 @@ namespace CasaDomotica
             elementos.Add("Aire", imgAire);
             elementos.Add("Temporizador", imgTemporizador);
             elementos.Add("Television", imgTele);
+            elementos.Add("Tele", imgTele);
             elementos.Add("Tiempo", imgTele);
             elementos.Add("Noticias", imgTele);
-            elementos.Add("YouTube", imgTele);
+            elementos.Add("Vegeta", imgTele);
 
             // Diccionario de acciones
             acciones.Add("enciende", "01");
@@ -130,7 +131,7 @@ namespace CasaDomotica
             {
 
                 if (!escuchando && e.Result.Grammar == grammarPaco &&
-                e.Result.Confidence > 0.50)
+                e.Result.Confidence > 0.70)
                 {
                     escuchando = true;
                     frase = e.Result.Text.ToString();
@@ -142,8 +143,9 @@ namespace CasaDomotica
                     grammarComandos.Enabled = true;
                 }
                 else if (escuchando && e.Result.Grammar == grammarComandos &&
-                e.Result.Confidence > 0.30)
+                e.Result.Confidence > 0.60)
                 {
+                    lblTextoPaco.Content = "Escuchando comando";
                     frase = e.Result.Text.ToString();
                     lblTexto.Content = frase;
                     string[] fraseSplit = frase.Split(' ');
@@ -167,7 +169,8 @@ namespace CasaDomotica
                     }
 
                 }
-                else if (escuchando && e.Result.Grammar == grammarNumeros)
+                else if (escuchando && e.Result.Grammar == grammarNumeros && 
+                e.Result.Confidence > 0.50)
                 {
                     numero = e.Result.Text.ToString();
                     if (elemento == "Aire")
@@ -176,7 +179,6 @@ namespace CasaDomotica
                         TxtTemperatura.Text = numero + "°C";
                         TxtTemperatura.Visibility = Visibility.Visible;
                     }
-
 
                     if (elemento == "Temporizador")
                     {
@@ -191,11 +193,19 @@ namespace CasaDomotica
                     grammarPaco.Enabled = true;
                     imgPaco.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "Paco00.png") as ImageSource;
                 }
-                else
+                else if ((e.Result.Grammar != grammarPaco && e.Result.Confidence < 0.70) ||
+                (e.Result.Grammar == grammarNumeros && e.Result.Confidence< 0.60) ||
+                (e.Result.Grammar == grammarComandos && e.Result.Confidence< 0.50))
                 {
 
                     // por si no lo entienede que suene un sonido de error
                     sonidoError.Play();
+                    escuchando = false;
+                    grammarComandos.Enabled = false;
+                    grammarNumeros.Enabled = false;
+                    grammarPaco.Enabled = true;
+                    imgPaco.Source = new ImageSourceConverter().ConvertFromString(rutaFija + "Paco10.png") as ImageSource;
+                    
 
 
                 }
@@ -209,13 +219,13 @@ namespace CasaDomotica
 
             Image img = elementos[elemento];
             string ruta = rutaFija + img.Name.Substring(3);
-            if (img.Name == "imgTele" && elemento != "Television")
+            if (img.Name == "imgTele" && elemento != "Television" && acciones[accion]=="01")
             {
                 ruta += accion == "quita" ? "01" : elemento switch
                 {
                     "Noticias" => "10",
                     "Tiempo" => "11",
-                    "YouTube" => "12",
+                    "Vegeta" => "12",
                     _ => "01",
                 };
             }
@@ -223,19 +233,12 @@ namespace CasaDomotica
             {
                 ruta += acciones[accion];
             }
-            if (acciones[accion] == "00")
+
+            if (acciones[accion] == "00" && elemento == "aire")
             {
-                if (acciones[accion] == "01")
-                {
-                    TxtTemperatura.Visibility = Visibility.Visible;
-                    if (TxtTemperatura.Text == "")
-                        TxtTemperatura.Text = "22°C";
-                }
-                else if (acciones[accion] == "00")
-                {
-                    TxtTemperatura.Visibility = Visibility.Hidden;
-                }
+                TxtTemperatura.Visibility = Visibility.Hidden;
             }
+
             img.Source = new ImageSourceConverter().ConvertFromString(ruta + ".png") as ImageSource;
 
         }
