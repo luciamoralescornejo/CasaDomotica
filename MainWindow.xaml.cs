@@ -84,15 +84,28 @@ namespace CasaDomotica
 
             // Diccionario de sonidos
             sonidos.Add("Paco00", new SoundPlayer(rutaFijaSnd + "Paco00.wav"));
+<<<<<<< HEAD
             sonidos.Add("Paco01", new SoundPlayer(rutaFijaSnd + "Paco01.wav")); 
             sonidos.Add("Temporizador00", new SoundPlayer(rutaFijaSnd + "Temporizador00.wav")); 
             sonidos.Add("Temporizador01", new SoundPlayer(rutaFijaSnd + "Temporizador01.wav")); 
+=======
+            sonidos.Add("Paco01", new SoundPlayer(rutaFijaSnd + "Paco00.wav"));// Elimnar esta linea duplicada cuando se añada el sonido
+            //sonidos.Add("Paco01", new SoundPlayer(rutaFijaSnd + "Paco01.wav")); // Poner sonido para cuando paco escucha
+            sonidos.Add("Temporizador00", new SoundPlayer(rutaFijaSnd + "Temporizador00.wav")); 
+            sonidos.Add("Temporizador01", new SoundPlayer(rutaFijaSnd + "Temporizador00.wav"));// Elimnar esta linea duplicada cuando se añada el sonido
+            //sonidos.Add("Temporizador01", new SoundPlayer(rutaFijaSnd + "Temporizador01.wav")); // Poner sonido de encender Temporizador
+>>>>>>> aa7850ab236aadc155a44bea3e107c247db5dda5
             sonidos.Add("Puerta01", new SoundPlayer(rutaFijaSnd + "Puerta.wav"));
             sonidos.Add("Puerta00", new SoundPlayer(rutaFijaSnd + "Puerta.wav"));
             sonidos.Add("Luz01", new SoundPlayer(rutaFijaSnd + "Luz.wav"));
             sonidos.Add("Luz00", new SoundPlayer(rutaFijaSnd + "Luz.wav"));
             sonidos.Add("Aire01", new SoundPlayer(rutaFijaSnd + "Aire01.wav"));
+<<<<<<< HEAD
             sonidos.Add("Aire00", new SoundPlayer(rutaFijaSnd + "Aire00.wav"));
+=======
+            sonidos.Add("Aire00", new SoundPlayer(rutaFijaSnd + "Aire01.wav"));// Elimnar esta linea duplicada cuando se añada el sonido
+            //sonidos.Add("Aire00", new SoundPlayer(rutaFijaSnd + "Aire00.wav"));// Poner Sonido de apagar aire
+>>>>>>> aa7850ab236aadc155a44bea3e107c247db5dda5
             sonidos.Add("Tele00", new SoundPlayer(rutaFijaSnd + "Tele00.wav"));
             sonidos.Add("Tele01", new SoundPlayer(rutaFijaSnd + "Tele01.wav"));
             sonidos.Add("Tele10", new SoundPlayer(rutaFijaSnd + "Tele10.wav"));
