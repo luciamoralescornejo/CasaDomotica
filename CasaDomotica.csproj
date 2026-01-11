@@ -12,6 +12,7 @@
     <None Remove="imagenes\Fondo.png" />
     <None Remove="imagenes\Mesa.png" />
     <None Remove="imagenes\Mueble.png" />
+    <None Remove="imagenes\PacoLogo.png" />
     <None Remove="imagenes\Sofa.png" />
   </ItemGroup>
 
@@ -42,6 +43,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="imagenes\Paco00.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="imagenes\PacoLogo.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="imagenes\Puerta01.png">
