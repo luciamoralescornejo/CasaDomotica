@@ -1,7 +1,5 @@
 ﻿using System;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics;
 using System.Linq;
 using System.Media;
@@ -60,7 +58,7 @@ namespace CasaDomotica
             ConfigReconocedor();
         }
 
-        // Este metodo configura unos diccionarios que se usan para automatizar algunos algoritmos
+        // Este método configura unos diccionarios que se usan para automatizar algunos algoritmos
         public void ConfigDiccionarios()
         {
             // Diccionario de Elementos
@@ -84,28 +82,15 @@ namespace CasaDomotica
 
             // Diccionario de sonidos
             sonidos.Add("Paco00", new SoundPlayer(rutaFijaSnd + "Paco00.wav"));
-<<<<<<< HEAD
-            sonidos.Add("Paco01", new SoundPlayer(rutaFijaSnd + "Paco01.wav")); 
-            sonidos.Add("Temporizador00", new SoundPlayer(rutaFijaSnd + "Temporizador00.wav")); 
-            sonidos.Add("Temporizador01", new SoundPlayer(rutaFijaSnd + "Temporizador01.wav")); 
-=======
-            sonidos.Add("Paco01", new SoundPlayer(rutaFijaSnd + "Paco00.wav"));// Elimnar esta linea duplicada cuando se añada el sonido
-            //sonidos.Add("Paco01", new SoundPlayer(rutaFijaSnd + "Paco01.wav")); // Poner sonido para cuando paco escucha
-            sonidos.Add("Temporizador00", new SoundPlayer(rutaFijaSnd + "Temporizador00.wav")); 
-            sonidos.Add("Temporizador01", new SoundPlayer(rutaFijaSnd + "Temporizador00.wav"));// Elimnar esta linea duplicada cuando se añada el sonido
-            //sonidos.Add("Temporizador01", new SoundPlayer(rutaFijaSnd + "Temporizador01.wav")); // Poner sonido de encender Temporizador
->>>>>>> aa7850ab236aadc155a44bea3e107c247db5dda5
+            sonidos.Add("Paco01", new SoundPlayer(rutaFijaSnd + "Paco01.wav"));
+            sonidos.Add("Temporizador00", new SoundPlayer(rutaFijaSnd + "Temporizador00.wav"));
+            sonidos.Add("Temporizador01", new SoundPlayer(rutaFijaSnd + "Temporizador01.wav"));
             sonidos.Add("Puerta01", new SoundPlayer(rutaFijaSnd + "Puerta.wav"));
             sonidos.Add("Puerta00", new SoundPlayer(rutaFijaSnd + "Puerta.wav"));
             sonidos.Add("Luz01", new SoundPlayer(rutaFijaSnd + "Luz.wav"));
             sonidos.Add("Luz00", new SoundPlayer(rutaFijaSnd + "Luz.wav"));
             sonidos.Add("Aire01", new SoundPlayer(rutaFijaSnd + "Aire01.wav"));
-<<<<<<< HEAD
             sonidos.Add("Aire00", new SoundPlayer(rutaFijaSnd + "Aire00.wav"));
-=======
-            sonidos.Add("Aire00", new SoundPlayer(rutaFijaSnd + "Aire01.wav"));// Elimnar esta linea duplicada cuando se añada el sonido
-            //sonidos.Add("Aire00", new SoundPlayer(rutaFijaSnd + "Aire00.wav"));// Poner Sonido de apagar aire
->>>>>>> aa7850ab236aadc155a44bea3e107c247db5dda5
             sonidos.Add("Tele00", new SoundPlayer(rutaFijaSnd + "Tele00.wav"));
             sonidos.Add("Tele01", new SoundPlayer(rutaFijaSnd + "Tele01.wav"));
             sonidos.Add("Tele10", new SoundPlayer(rutaFijaSnd + "Tele10.wav"));
@@ -113,13 +98,21 @@ namespace CasaDomotica
             sonidos.Add("Tele12", new SoundPlayer(rutaFijaSnd + "Tele12.wav"));
 
 
-            // Bucle NECESARIO para cargar los sonidos en memoria siempre, sino pueden fallar
+            // Bucle NECESARIO para cargar los sonidos en memoria siempre, si no pueden fallar
             foreach (var s in sonidos)
             {
-                s.Value.Load();
+                try
+                {
+                    s.Value.Load();
+                }
+                catch (Exception)
+                {
+                    // No bloquear la inicialización de la UI si falta un archivo de sonido.
+                    // Se podría loguear el error aquí.
+                }
             }
         }
-        // Este metodo configura el Recognizer para la escucha
+        // Este método configura el Recognizer para la escucha
         private void ConfigReconocedor()
         {
             // Grammar para la llamada Paco
@@ -129,20 +122,20 @@ namespace CasaDomotica
             Grammar grammarPaco = new Grammar(gbPaco);
 
             // Grammar para los comandos
-            Choices comandos = new Choices();
-            comandos.Add(acciones.Keys.ToArray<string>());
-            Choices elementos = new Choices();
-            elementos.Add(this.elementos.Keys.ToArray());
+            Choices accionesChoices = new Choices();
+            accionesChoices.Add(acciones.Keys.ToArray<string>());
+            Choices elementosChoices = new Choices();
+            elementosChoices.Add(this.elementos.Keys.ToArray());
 
             GrammarBuilder gbComandos = new GrammarBuilder();
-            gbComandos.Append(comandos);
-            gbComandos.Append(elementos);
+            gbComandos.Append(accionesChoices);
+            gbComandos.Append(elementosChoices);
 
             Grammar grammarComandos = new Grammar(gbComandos);
 
             // Grammar de numeros
-            Choices numeros = new Choices();
-            numeros.Add(new string[]
+            Choices numerosChoices = new Choices();
+            numerosChoices.Add(new string[]
             {
                 "1","2","3","4","5","6","7","8","9","10",
                 "11","12","13","14","15","16","17","18","19","20",
@@ -153,7 +146,7 @@ namespace CasaDomotica
 
             });
             GrammarBuilder gbNumeros = new GrammarBuilder();
-            gbNumeros.Append(numeros);
+            gbNumeros.Append(numerosChoices);
             Grammar grammarNumeros = new Grammar(gbNumeros);
 
             // Añadimos las dos Grammar y deshabilitamos la de comandos
@@ -166,16 +159,17 @@ namespace CasaDomotica
             recognizer.SetInputToDefaultAudioDevice();
 
             // Logica de escucha
-            string frase, numero;
-            escuchando = false;
+
             recognizer.SpeechRecognized += (s, e) =>
             {
+                Grammar resultGrammar = e.Result.Grammar;
+                float confidence = e.Result.Confidence;
+
                 // 1º Caso de escucha: LLAMADA PACO
-                if (!escuchando && e.Result.Grammar == grammarPaco &&
-                e.Result.Confidence > 0.70)
+                if (!escuchando && resultGrammar == grammarPaco && confidence > 0.70)
                 {
                     escuchando = true;
-                    frase = e.Result.Text.ToString();
+                    string frase = e.Result.Text.ToString();
                     lblTextoPaco.Content = frase;
 
                     // Cambiamos la gramatica para pasar al 2º Caso de escucha
@@ -185,17 +179,17 @@ namespace CasaDomotica
                 }
 
                 // 2º Caso de escucha: COMANDO
-                else if (escuchando && e.Result.Grammar == grammarComandos &&
-                e.Result.Confidence > 0.60)
+                else if (escuchando && resultGrammar == grammarComandos && confidence > 0.60)
                 {
                     lblTextoPaco.Content = "Escuchando comando";
-                    frase = e.Result.Text.ToString();
+                    string frase = e.Result.Text.ToString();
                     lblTexto.Content = frase;
                     string[] fraseSplit = frase.Split(' ');
+
                     accion = fraseSplit[0];
                     elemento = fraseSplit[1];
 
-                    // Comprobacion para USAR O NO el 3º caso de escucha
+                    // Comprobación para usar o no el 3º caso de escucha
                     if ((elemento == "Aire" || elemento == "Temporizador") && accion == "pon")
                     {
                         // Ejecutamos el comando
@@ -214,16 +208,13 @@ namespace CasaDomotica
                         grammarComandos.Enabled = false;
                         grammarPaco.Enabled = true;
                         imgPaco.Source = new ImageSourceConverter().ConvertFromString(rutaFijaImg + "Paco00.png") as ImageSource;
-
                     }
-
                 }
 
                 // 3º Caso de escucha: NUMEROS
-                else if (escuchando && e.Result.Grammar == grammarNumeros &&
-                e.Result.Confidence > 0.50)
+                else if (escuchando && resultGrammar == grammarNumeros && confidence > 0.50)
                 {
-                    numero = e.Result.Text.ToString();
+                    string numero = e.Result.Text.ToString();
 
                     if (elemento == "Aire")
                     {
@@ -244,15 +235,15 @@ namespace CasaDomotica
                     imgPaco.Source = new ImageSourceConverter().ConvertFromString(rutaFijaImg + "Paco00.png") as ImageSource;
                 }
 
-                // 4º Caso de escucha : NO RECONOCIDO (No se activa si el escuchador esta en el 1º Caso) 
-                else if ((e.Result.Grammar != grammarPaco && e.Result.Confidence < 0.70) ||
-                (e.Result.Grammar == grammarNumeros && e.Result.Confidence < 0.60) ||
-                (e.Result.Grammar == grammarComandos && e.Result.Confidence < 0.50))
+                // 4º Caso de escucha: no reconocido (No se activa si el escuchador está en el 1º caso)
+                else if ((resultGrammar != grammarPaco && confidence < 0.70) ||
+                (resultGrammar == grammarNumeros && confidence < 0.60) ||
+                (resultGrammar == grammarComandos && confidence < 0.50))
                 {
-                    // por si no lo entienede que suene un sonido de error
+                    // Por si no lo entiende que suene un sonido de error
                     sonidos["Paco00"].Play();
 
-                    // Cambiamos la gramatica para pasar al 1º Caso de escucha
+                    // Cambiamos la gramatica para pasar al 1º caso de escucha
                     escuchando = false;
                     grammarComandos.Enabled = false;
                     grammarNumeros.Enabled = false;
@@ -266,17 +257,17 @@ namespace CasaDomotica
 
         public void EjecutarComando()
         {
-            // Cojemos el objeto de imagen accediendo al diccionario
+            // Cogemos el objeto de imagen accediendo al diccionario
             Image img = elementos[elemento];
+            string accionCod = acciones[accion];
 
             // Iniciamos la ruta  con la ruta fija y el nombre descriptivo de la imagen sin prefijo
-            string ruta =img.Name.Substring(3);
-            // Como el caso de la television es especial ya que tiene mas estados comprobamos si el estado es un programa de television
-            if (img.Name == "imgTele" && elemento != "Television" && acciones[accion] == "01")
-            {
+            string ruta = img.Name.Substring(3);
 
-                //TODO Creo que este terciaro sobra hay que probarlo y si es inutil hay que quitarlo
-                ruta += accion == "quita" ? "01" : elemento switch
+            // Como el caso de la televisión es especial ya que tiene más estados comprobamos si el estado es un programa de televisión
+            if (img.Name == "imgTele" && elemento != "Television" && accionCod == "01")
+            {
+                ruta += elemento switch
                 {
                     "Noticias" => "10",
                     "Tiempo" => "11",
@@ -288,19 +279,19 @@ namespace CasaDomotica
             // Si no es un estado especial de la tele añadimos a la ruta la accion
             else
             {
-                ruta += acciones[accion];
+                ruta += accionCod;
             }
 
             // En caso de que se esté apagando el aire ocultaremos su etiqueta
-            if (acciones[accion] == "00" && elemento == "aire")
+            if (accionCod == "00" && elemento == "Aire")
             {
                 TxtTemperatura.Visibility = Visibility.Hidden;
             }
 
-           
-            if (acciones[accion] == "00" && elemento == "Temporizador")
+
+            if (accionCod == "00" && elemento == "Temporizador")
             {
-                if (temporizador.IsEnabled)
+                if (temporizador != null && temporizador.IsEnabled)
                 {
                     lblTextoPaco.Content = "entra";
                     temporizador.Stop();
@@ -309,7 +300,7 @@ namespace CasaDomotica
 
             // Llamamos al sonido
             sonidos[ruta].Play();
-            img.Source = new ImageSourceConverter().ConvertFromString(rutaFijaImg+ruta + ".png") as ImageSource;
+            img.Source = new ImageSourceConverter().ConvertFromString(rutaFijaImg + ruta + ".png") as ImageSource;
 
         }
         public void IniciarTemporizador(int segundos)
@@ -319,7 +310,7 @@ namespace CasaDomotica
 
             temporizador = new DispatcherTimer();
 
-            // cuanto menos intervalo tenga más precisión tiene.
+            // Cuanto menos intervalo tenga más precisión tiene.
             temporizador.Interval = TimeSpan.FromMilliseconds(200);
 
             // Asigno un evento de escucha (Temporizador_Tick) a un método (temporizador.Tick)
@@ -332,23 +323,22 @@ namespace CasaDomotica
         private void Temporizador_Tick(object sender, EventArgs e)
         {
 
-            //calculo cuanto tiempo ha pasado 
+            // Calculo cuánto tiempo ha pasado 
             TimeSpan tiempoRestante = duracionTotal - reloj.Elapsed;
 
             // Calculamos la imagen segun el resto del tiempoRestante entre 12
             string numImg = tiempoRestante.Seconds % 12 < 10 ? "0" + tiempoRestante.Seconds % 12 : "" + tiempoRestante.Seconds % 12;
 
-            //timeSpan.zero es un método mas preciso que poner '0'
+            // TimeSpan.Zero es un método más preciso que poner '0'
             if (tiempoRestante <= TimeSpan.Zero)
             {
-                // paramos el temporizador porque ya ha llegado a su fin
+                // Paramos el temporizador porque ya ha llegado a su fin
                 temporizador.Stop();
 
-                // esta linea en realidad es rebundante pero la mantengo para solucion de posibles fallos
+                // Esta línea en realidad es redundante pero la mantengo para solucion de posibles fallos
                 imgTemporizador.Source = new ImageSourceConverter().ConvertFromString(rutaFijaImg + "Temporizador" + "00" + ".png") as ImageSource;
 
-                // AQUI SE REPORODUCIRA UNA ALARMA, OJO SI LO QUEREIS CAMBIARLO SOLO ADMITE .WAV
-
+                // Aqui se reproducira una alarma
                 sonidos["Temporizador00"].Play();
                 return;
             }
