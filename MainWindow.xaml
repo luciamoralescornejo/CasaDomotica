@@ -81,9 +81,9 @@
                Canvas.Bottom="130"/>
 
                 <!-- Textos Provisionales-->
-                <Label x:Name="lblTexto" Content="Label" Canvas.Left="192" Canvas.Top="130" Height="35" Width="153"/>
+                <!--<Label x:Name="lblTexto" Content="Label" Canvas.Left="192" Canvas.Top="130" Height="35" Width="153"/>
                 <Label x:Name="lblNumerosTemp" Content="label" Canvas.Left="555" Canvas.Top="68" Height="36" Width="152"/>
-                <Label x:Name="lblTextoPaco" Content="Label" Canvas.Left="192" Canvas.Top="168" Height="35" Width="153" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Label x:Name="lblTextoPaco" Content="Label" Canvas.Left="192" Canvas.Top="168" Height="35" Width="153" HorizontalAlignment="Center" VerticalAlignment="Top"/>-->
 
             </Canvas>
         </Viewbox>

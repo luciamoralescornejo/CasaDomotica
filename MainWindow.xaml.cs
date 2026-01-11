@@ -170,7 +170,7 @@ namespace CasaDomotica
                 {
                     escuchando = true;
                     string frase = e.Result.Text.ToString();
-                    lblTextoPaco.Content = frase;
+                    //lblTextoPaco.Content = frase;
 
                     // Cambiamos la gramatica para pasar al 2º Caso de escucha
                     imgPaco.Source = new ImageSourceConverter().ConvertFromString(rutaFijaImg + "Paco01.png") as ImageSource;
@@ -181,9 +181,9 @@ namespace CasaDomotica
                 // 2º Caso de escucha: COMANDO
                 else if (escuchando && resultGrammar == grammarComandos && confidence > 0.60)
                 {
-                    lblTextoPaco.Content = "Escuchando comando";
+                    //lblTextoPaco.Content = "Escuchando comando";
                     string frase = e.Result.Text.ToString();
-                    lblTexto.Content = frase;
+                    //lblTexto.Content = frase;
                     string[] fraseSplit = frase.Split(' ');
 
                     accion = fraseSplit[0];
@@ -225,7 +225,7 @@ namespace CasaDomotica
                     if (elemento == "Temporizador")
                     {
                         IniciarTemporizador(Int32.Parse(numero));
-                        lblNumerosTemp.Content = numero;
+                        //lblNumerosTemp.Content = numero;
                     }
 
                     // Cambiamos la gramatica para pasar al 1º Caso de escucha
@@ -293,7 +293,7 @@ namespace CasaDomotica
             {
                 if (temporizador != null && temporizador.IsEnabled)
                 {
-                    lblTextoPaco.Content = "entra";
+                    //lblTextoPaco.Content = "entra";
                     temporizador.Stop();
                 }
             }
